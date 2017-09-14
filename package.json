@@ -21,8 +21,11 @@
   "homepage": "https://github.com/preboot/angularjs-webpack",
   "dependencies": {
     "angular": "^1.5.0",
-    "angular-ui-router": "^1.0.3",
-    "bootstrap": "^3.3.7"
+    "angular-cookie": "^4.1.0",
+    "@uirouter/angularjs": "^1.0.4",
+    "bootstrap": "^3.3.7",
+    "ng-token-auth": "0.0.30",
+    "ngstorage": "^0.3.11"
   },
   "devDependencies": {
     "angular-mocks": "^1.5.0",

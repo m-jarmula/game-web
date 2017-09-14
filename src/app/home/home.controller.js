@@ -1,5 +1,6 @@
 class HomeCtrl {
   constructor() {
+
   }
 }
 
