@@ -5,6 +5,9 @@ import router from '@uirouter/angularjs';
 import ngStorage from 'ngstorage'
 import ipCookie from 'angular-cookie';
 import ngTokenAuth from 'ng-token-auth';
+global.PIXI = require('pixi.js');
+global.p2 = require('p2');
+global.Phaser = require('phaser');
 // Modules
 import ServicesModule from './services'
 import DirectivesModule from './shared/directives'
@@ -13,6 +16,7 @@ import HomeCtrl from './home/home.controller';
 import LoginCtrl from './login/login.controller';
 import RegistrationCtrl from './registration/registration.controller';
 
+console.warn(Phaser);
 
 import run from './run';
 import routing from './app.config';

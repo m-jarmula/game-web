@@ -20,12 +20,16 @@
   },
   "homepage": "https://github.com/preboot/angularjs-webpack",
   "dependencies": {
+    "@uirouter/angularjs": "^1.0.4",
     "angular": "^1.5.0",
     "angular-cookie": "^4.1.0",
-    "@uirouter/angularjs": "^1.0.4",
     "bootstrap": "^3.3.7",
     "ng-token-auth": "0.0.30",
-    "ngstorage": "^0.3.11"
+    "ngstorage": "^0.3.11",
+    "p2": "^0.7.1",
+    "phaser": "^2.6.2",
+    "pixi": "^0.3.1",
+    "pixi.js": "^4.4.3"
   },
   "devDependencies": {
     "angular-mocks": "^1.5.0",
