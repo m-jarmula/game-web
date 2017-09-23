@@ -1,6 +1,8 @@
 /* styles in src/style directory are applied to the whole page */
 body {
-  background: #f1f1f1;
+  padding: 0px;
+  margin: 0px;
+  background-color: black;
 }
 
 a {
@@ -18,4 +20,15 @@ main {
 footer {
   text-align: center;
   font-size: 0.8em;
+}
+
+@font-face {
+  font-family: 'Kells';
+  src: url('public/fonts/kells_uncial.ttf');
+}
+
+.fontPreload {
+  font-family: 'Kells';
+  position:absolute;
+  left:-100px;
 }
