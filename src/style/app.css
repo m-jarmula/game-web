@@ -24,7 +24,7 @@ footer {
 
 @font-face {
   font-family: 'Kells';
-  src: url('public/fonts/kells_uncial.ttf');
+  src: url('../public/fonts/kells_uncial.ttf');
 }
 
 .fontPreload {
