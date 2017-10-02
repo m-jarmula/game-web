@@ -1,19 +1,41 @@
-global.PIXI = require( 'phaser/dist/pixi' )
-global.p2 = require( 'phaser/dist/p2' )
-global.Phaser = require('phaser');
+import JsonState from './json.state';
 
-class TitleState extends Phaser.State {
+class TitleState extends JsonState {
   init() {
     this.scale.scaleModel = Phaser.ScaleManager.SHOW_ALL;
     this.scale.pageAlignHorizontally = true;
     this.scale.pageAlignVertically = true;
   }
-  preload() {
-    this.load.image('background_image', '/img/battle/background.png');
+
+  init(levelData) {
+    this.levelData = levelData;
   }
+
   create() {
-    var backgorund = this.game.add.sprite(0, 0, 'background_image');
-    var title = this.game.add.text(100, 100, "Phaser RPG")
+    this.setGroups();
+    this.setSprites();
+  }
+
+  setGroups() {
+    this.groups = {}
+    this.levelData.groups.forEach((groupName) => {
+      this.groups[groupName] = this.game.add.group();
+    }, this);
+  }
+
+  setSprites() {
+    this.sprites = {};
+    for(var spriteName in this.levelData.sprites) {
+      var spriteData = this.levelData.sprites[spriteName];
+      switch(spriteData.type) {
+        case 'sprite':
+          var sprite = this.game.add.sprite(spriteData.position.x, spriteData.position.y, spriteData.texture); break;
+        case 'text':
+        var sprite = this.game.add.text(spriteData.position.x, spriteData.position.y, spriteData.text, spriteData.style); break;
+      }
+      this.sprites[spriteName] = sprite;
+      this.groups[spriteData.group].add(sprite);
+    }
   }
 }
 export default TitleState;
