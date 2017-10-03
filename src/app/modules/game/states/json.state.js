@@ -1,31 +1,31 @@
 import BaseState from './base.state';
+import SpritePrefab from '../prefabs/sprite.prefab';
+import TextPrefab from '../prefabs/text.prefab';
 
 class JsonState extends BaseState {
   init(levelData) {
     this.levelData = levelData;
-    var message = this.game.add.text(this.game.world.centerX,
-                                     this.game.world.centerY,
-                                     'Loading',
-                                     { font: '48px Kells', fill: '#fff' }
-                                    );
-    message.anchor.setTo(0.5, 0.5);
-  }
-
-  preload() {
-    var assets = this.levelData.assets;
-    for(var assetKey in assets) {
-      var asset = assets[assetKey];
-      switch(asset.type) {
-        case 'image':
-          this.load.image(assetKey, asset.source); break;
-        case 'spritesheet':
-          this.load.spritesheet(assetKey, asset.source, asset.frame_width, asset.frame_height, asset.frames, asset.margin, asset.spacing); break;
-      }
-    }
   }
 
   create() {
-    this.game.state.start("TitleState", true, false, this.levelData);
+    this.setGroups();
+    this.setPrefabs();
+  }
+
+  setGroups() {
+    this.groups = {}
+    this.levelData.groups.forEach((groupName) => {
+      this.groups[groupName] = this.game.add.group();
+    }, this);
+  }
+
+  setPrefabs() {
+    this.prefabs = {};
+    for(var prefabName in this.levelData.prefabs) {
+      var prefabData = this.levelData.prefabs[prefabName];
+      var prefabClass = this.prefabClasses[prefabData.type];
+      var prefab = new prefabClass(this, prefabData.name, prefabData.position, prefabData.properties);
+    }
   }
 }
 export default JsonState;

@@ -15,7 +15,7 @@ class TitleState extends JsonState {
 
   create() {
     var levelData = JSON.parse(this.game.cache.getText('level_file'));
-    this.game.state.start("LoadingState", true, false, levelData)
+    this.game.state.start('LoadingState', true, false, levelData)
   }
 }
 export default TitleState;
