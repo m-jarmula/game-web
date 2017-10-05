@@ -52,12 +52,14 @@
                  "properties":
                     {
                      "group":"players",
-                     "texture":"player_spritesheet"
+                     "texture":"player_spritesheet",
+                     "walkingSpeed":50
                     },
                  "propertytypes":
                     {
                      "group":"string",
-                     "texture":"string"
+                     "texture":"string",
+                     "walkingSpeed":"int"
                     },
                  "rotation":0,
                  "type":"player",

@@ -2,7 +2,7 @@ global.Phaser = require('phaser');
 import PrefabHelper from '../helpers/prefab.helper';
 
 class SpritePrefab extends Phaser.Sprite {
-  constructor(gameState, name, position, properties ) {
+  constructor(gameState, name, position, properties) {
     super(gameState.game, position.x, position.y, properties.texture);
 
     var helper = new PrefabHelper(this);

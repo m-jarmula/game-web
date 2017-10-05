@@ -1,17 +1,26 @@
 import JsonState from './json.state';
 import SpritePrefab from '../prefabs/sprite.prefab';
+import PlayerPrefab from '../prefabs/world/player.prefab';
 
 class WorldState extends JsonState {
     constructor() {
     super();
     this.prefabClasses = {
       background: SpritePrefab,
-      player: SpritePrefab
+      player: PlayerPrefab
     }
+  }
+
+  init(levelData) {
+    super.init(levelData);
+
+    this.game.physics.startSystem(Phaser.Physics.ARCADE);
+    this.game.physics.arcade.gravity.y = 0;
   }
 
   create() {
     this.map = this.game.add.tilemap(this.levelData.map.key);
+    console.warn(this.map.tilesets);
     var tilesetIndex = 0;
     this.map.tilesets.forEach((tileset) => {
       this.map.addTilesetImage(tileset.name, this.levelData.map.tilesets[tilesetIndex]);
@@ -20,15 +29,17 @@ class WorldState extends JsonState {
     this.layers = {};
     this.map.layers.forEach((layer) => {
       this.layers[layer.name] = this.map.createLayer(layer.name);
-      if(layer.collision) {
+      if(layer.properties.collision) {
         this.map.setCollisionByExclusion([-1], true, layer.name);
       }
-    });
+    }, this);
     this.layers[this.map.layer.name].resizeWorld();
     super.create();
 
     for(var objectLayer in this.map.objects) {
-      this.map.objects[objectLayer].forEach(this.createObject, this);
+      if (this.map.objects.hasOwnProperty(objectLayer)) {
+        this.map.objects[objectLayer].forEach(this.createObject, this);
+      }
     }
   }
 
