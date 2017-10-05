@@ -1,7 +1,7 @@
 import JsonState from './json.state';
 
 class LoadingState extends JsonState {
-  init(levelData) {
+  init(levelData, nextState) {
     this.levelData = levelData;
     var message = this.game.add.text(this.game.world.centerX,
                                      this.game.world.centerY,
@@ -9,6 +9,7 @@ class LoadingState extends JsonState {
                                      { font: '48px Kells', fill: '#fff' }
                                     );
     message.anchor.setTo(0.5, 0.5);
+    this.nextState = nextState;
   }
 
   preload() {
@@ -20,12 +21,14 @@ class LoadingState extends JsonState {
           this.load.image(assetKey, asset.source); break;
         case 'spritesheet':
           this.load.spritesheet(assetKey, asset.source, asset.frame_width, asset.frame_height, asset.frames, asset.margin, asset.spacing); break;
+        case 'tilemap':
+          this.load.tilemap(assetKey, asset.source, null, Phaser.Tilemap.TILED_JSON); break;
       }
     }
   }
 
   create() {
-    this.game.state.start('TitleState', true, false, this.levelData);
+    this.game.state.start(this.nextState, true, false, this.levelData);
   }
 }
 export default LoadingState;

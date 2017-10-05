@@ -1,6 +1,7 @@
 import TitleState from '../../states/title.state';
 import BootState from '../../states/boot.state';
 import LoadingState from '../../states/loading.state';
+import WorldState from '../../states/world.state';
 
 
 class BoardDirective {
@@ -18,9 +19,10 @@ class BoardDirectiveController {
   constructor(SessionService) {
     this.game = new Phaser.Game(640, 480, Phaser.AUTO, 'board');
     this.game.state.add("BootState", new BootState());
-    this.game.state.add("TitleState", new TitleState());
     this.game.state.add("LoadingState", new LoadingState());
-    this.game.state.start("BootState", true, false, 'states/title.json');
+    this.game.state.add("TitleState", new TitleState());
+    this.game.state.add("WorldState", new WorldState());
+    this.game.state.start("BootState", true, false, 'states/title.json', 'TitleState');
   }
 }
 
