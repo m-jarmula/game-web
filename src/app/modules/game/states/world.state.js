@@ -20,7 +20,6 @@ class WorldState extends JsonState {
 
   create() {
     this.map = this.game.add.tilemap(this.levelData.map.key);
-    console.warn(this.map.tilesets);
     var tilesetIndex = 0;
     this.map.tilesets.forEach((tileset) => {
       this.map.addTilesetImage(tileset.name, this.levelData.map.tilesets[tilesetIndex]);

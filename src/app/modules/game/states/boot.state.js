@@ -5,7 +5,7 @@ class TitleState extends JsonState {
     this.levelFile = levelFile;
     this.nextState = nextState;
 
-    this.scale.scaleModel = Phaser.ScaleManager.SHOW_ALL;
+    this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
     this.scale.pageAlignHorizontally = true;
     this.scale.pageAlignVertically = true;
   }
