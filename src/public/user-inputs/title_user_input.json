@@ -1,0 +1,7 @@
+{
+    "keydown": {
+        "ENTER": {
+            "callback": "gameState.startGame"
+        }
+    }
+}

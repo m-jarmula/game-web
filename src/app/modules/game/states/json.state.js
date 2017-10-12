@@ -1,6 +1,7 @@
 import BaseState from './base.state';
 import SpritePrefab from '../prefabs/sprite.prefab';
 import TextPrefab from '../prefabs/text.prefab';
+import UserInputPlugin from '../plugins/user-input.plugin.js';
 
 class JsonState extends BaseState {
   init(levelData) {
@@ -10,6 +11,9 @@ class JsonState extends BaseState {
   create() {
     this.setGroups();
     this.setPrefabs();
+    this.userInput = this.game.plugins.add(UserInputPlugin, this);
+    this.userInputData = JSON.parse(this.game.cache.getText('userInput'));
+    this.userInput.setInput(this.userInputData);
   }
 
   setGroups() {

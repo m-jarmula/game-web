@@ -25,6 +25,7 @@ class LoadingState extends JsonState {
           this.load.tilemap(assetKey, asset.source, null, Phaser.Tilemap.TILED_JSON); break;
       }
     }
+    this.load.text('userInput', this.levelData.userInput);
   }
 
   create() {

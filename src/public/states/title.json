@@ -33,5 +33,6 @@
               "group": "texts"
             }
         }
-    }
+    },
+    "userInput": "user-inputs/title_user_input.json"
 }

@@ -31,19 +31,19 @@ class MoveableConcern {
   }
 
   isMovingLeft() {
-    return this.movableObject.cursors.left.isDown && this.movableObject.body.velocity.x <= 0;
+    return this.movableObject.moving.left && this.movableObject.body.velocity.x <= 0;
   }
 
   isMovingRight() {
-    return this.movableObject.cursors.right.isDown && this.movableObject.body.velocity.x >= 0;
+    return this.movableObject.moving.right && this.movableObject.body.velocity.x >= 0;
   }
 
   isMovingUp() {
-    return this.movableObject.cursors.up.isDown && this.movableObject.body.velocity.y <= 0;
+    return this.movableObject.moving.down && this.movableObject.body.velocity.y <= 0;
   }
 
   isMovingDown() {
-    return this.movableObject.cursors.down.isDown && this.movableObject.body.velocity.y >= 0;
+    return this.movableObject.moving.up && this.movableObject.body.velocity.y >= 0;
   }
 
   isNotMoving() {

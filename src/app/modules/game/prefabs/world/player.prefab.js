@@ -22,6 +22,12 @@ class PlayerPrefab extends SpritePrefab {
     this.animations.add("walkingRight", [3, 7, 11, 15], 6, true);
 
     this.stoppedFrames = [FACE_DOWN_FRAME, FACE_LEFT_FRAME, FACE_RIGHT_FRAME, FACE_UP_FRAME];
+
+    this.moving = {left: false, right: false, up: false, down: false};
+  }
+
+  changeMovement(direction, move) {
+    this.moving[direction] = move;
   }
 
   update() {
