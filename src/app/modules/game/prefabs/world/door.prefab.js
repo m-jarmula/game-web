@@ -7,12 +7,13 @@ class DoorPrefab extends SpritePrefab {
     this.anchor.setTo(0.5);
 
     this.nextLevel = properties.next_level;
-    this.gameState.game.physics.arcade.enable(true);
+    this.gameState.game.physics.arcade.enable(this);
+
     this.body.immovable = true;
   }
 
   update() {
-    this.gameState.game.physics.collide(this, this.gameState.groups.players,
+    this.gameState.game.physics.arcade.collide(this, this.gameState.groups.players,
                                         this.enter, null, this);
 
   }

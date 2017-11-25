@@ -9,7 +9,7 @@ class WorldState extends JsonState {
     this.prefabClasses = {
       background: SpritePrefab,
       player: PlayerPrefab,
-      // door: DoorPrefab
+      door: DoorPrefab
     }
   }
 

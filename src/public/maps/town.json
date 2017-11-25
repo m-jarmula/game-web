@@ -53,13 +53,13 @@
                     {
                      "group":"players",
                      "texture":"player_spritesheet",
-                     "walking_speed":50
+                     "walkingSpeed":50
                     },
                  "propertytypes":
                     {
                      "group":"string",
                      "texture":"string",
-                     "walking_speed":"int"
+                     "walkingSpeed":"int"
                     },
                  "rotation":0,
                  "type":"player",
@@ -75,7 +75,7 @@
                  "properties":
                     {
                      "group":"doors",
-                     "next_level":"assets\/levels\/cave.json"
+                     "next_level":"..\/states\/cave.json"
                     },
                  "propertytypes":
                     {
@@ -104,7 +104,7 @@
         {
          "columns":20,
          "firstgid":1,
-         "image":"..\/images\/tileset.png",
+         "image":"..\/img\/tileset.png",
          "imageheight":384,
          "imagewidth":640,
          "margin":0,

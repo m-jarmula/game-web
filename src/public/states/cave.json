@@ -1,10 +1,10 @@
 {
     "assets": {
-        "map_tileset": {"type": "image", "source": "assets/images/tileset.png"},
+        "map_tileset": {"type": "image", "source": "img/tileset.png"},
 
-        "player_spritesheet": {"type": "spritesheet", "source": "assets/images/world/player.png", "frame_width": 16, "frame_height": 16},
-        
-        "level_tilemap": {"type": "tilemap", "source": "assets/maps/cave.json"}
+        "player_spritesheet": {"type": "spritesheet", "source": "img/world/player.png", "frame_width": 16, "frame_height": 16},
+
+        "level_tilemap": {"type": "tilemap", "source": "maps/cave.json"}
     },
     "groups": [
         "doors",
@@ -14,5 +14,5 @@
         "key": "level_tilemap",
         "tilesets": ["map_tileset"]
     },
-    "user_input": "assets/user_inputs/world_map_user_input.json"
+    "userInput": "user-inputs/world_map_user_input.json"
 }
