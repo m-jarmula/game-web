@@ -1,13 +1,15 @@
 import JsonState from './json.state';
 import SpritePrefab from '../prefabs/sprite.prefab';
 import PlayerPrefab from '../prefabs/world/player.prefab';
+import DoorPrefab from '../prefabs/world/door.prefab';
 
 class WorldState extends JsonState {
     constructor() {
     super();
     this.prefabClasses = {
       background: SpritePrefab,
-      player: PlayerPrefab
+      player: PlayerPrefab,
+      // door: DoorPrefab
     }
   }
 
@@ -44,7 +46,11 @@ class WorldState extends JsonState {
 
   createObject(object) {
     var position = this.centerObjectAnchor(object);
-    var prefab = new this.prefabClasses[object.type](this, object.name, position, object.properties);
+    if (typeof this.prefabClasses[object.type] !== 'undefined') {
+      var prefab = new this.prefabClasses[object.type](this, object.name, position, object.properties);
+    } else {
+      console.warn("Prefab " + object.type + " does not exists.")
+    }
   }
 
   centerObjectAnchor(object) {

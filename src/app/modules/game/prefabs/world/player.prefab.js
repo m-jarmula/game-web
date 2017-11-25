@@ -6,9 +6,8 @@ const FACE_DOWN_FRAME = 0,
       FACE_RIGHT_FRAME = 3,
       FACE_UP_FRAME= 1;
 class PlayerPrefab extends SpritePrefab {
-  constructor(gameState, name, position, properties ) {
+  constructor(gameState, name, position, properties) {
     super(gameState, name, position, properties);
-
     this.anchor.setTo(0.5);
     this.walkingSpeed = +properties.walkingSpeed;
     this.gameState.game.physics.arcade.enable(this);
