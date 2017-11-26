@@ -2,6 +2,7 @@ import JsonState from './json.state';
 import SpritePrefab from '../prefabs/sprite.prefab';
 import PlayerPrefab from '../prefabs/world/player.prefab';
 import DoorPrefab from '../prefabs/world/door.prefab';
+import NpcPrefab from '../prefabs/world/npc.prefab';
 
 class WorldState extends JsonState {
     constructor() {
@@ -9,7 +10,8 @@ class WorldState extends JsonState {
     this.prefabClasses = {
       background: SpritePrefab,
       player: PlayerPrefab,
-      door: DoorPrefab
+      door: DoorPrefab,
+      npc: NpcPrefab
     }
   }
 
@@ -58,6 +60,12 @@ class WorldState extends JsonState {
       x: object.x + (object.width / 2),
       y: object.y + (object.height / 2)
     };
+  }
+
+  preload() {
+    for(var npcMessageName in this.levelData.npcMessages){
+      this.load.text(npcMessageName, this.levelData.npcMessages[npcMessageName])
+    }
   }
 }
 export default WorldState;

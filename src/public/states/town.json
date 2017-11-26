@@ -1,6 +1,8 @@
 {
     "assets": {
         "map_tileset": {"type": "image", "source": "img/tileset.png"},
+        "villager_image": {"type": "image", "source": "img/world/villager.png"},
+        "guard_image": {"type": "image", "source": "img/world/knight.png"},
 
         "player_spritesheet": {"type": "spritesheet", "source": "img/world/player.png", "frame_width": 16, "frame_height": 16},
 
@@ -8,11 +10,16 @@
     },
     "groups": [
         "players",
-        "doors"
+        "doors",
+        "npcs"
     ],
     "map": {
         "key": "level_tilemap",
         "tilesets": ["map_tileset"]
     },
-    "userInput": "user-inputs/world_map_user_input.json"
+    "userInput": "user-inputs/world_map_user_input.json",
+    "npcMessages": {
+      "villager_message": "npc_messages/villager.message.txt",
+      "guard_message": "npc_messages/guard.message.txt"
+    }
 }
