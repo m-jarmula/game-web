@@ -60,7 +60,7 @@
                     {
                      "group":"string",
                      "texture":"string",
-                     "walking_speed":"int"
+                     "walkingSpeed":"int"
                     },
                  "rotation":0,
                  "type":"player",
@@ -76,7 +76,7 @@
                  "properties":
                     {
                      "group":"doors",
-                     "next_level":"states\/cave.json"
+                     "next_level":"..\/states\/cave.json"
                     },
                  "propertytypes":
                     {
