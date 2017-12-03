@@ -13,6 +13,10 @@ class WorldState extends JsonState {
       door: DoorPrefab,
       npc: NpcPrefab
     }
+    this.TEXT_STYLE = {
+      font: '14px Kells',
+      fill: '#FFF'
+    }
   }
 
   init(levelData) {

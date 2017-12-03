@@ -3,6 +3,7 @@
         "map_tileset": {"type": "image", "source": "img/tileset.png"},
         "villager_image": {"type": "image", "source": "img/world/villager.png"},
         "guard_image": {"type": "image", "source": "img/world/knight.png"},
+        "message_box_image": {"type": "image", "source": "img/world/message_box.png"},
 
         "player_spritesheet": {"type": "spritesheet", "source": "img/world/player.png", "frame_width": 16, "frame_height": 16},
 
@@ -11,7 +12,8 @@
     "groups": [
         "players",
         "doors",
-        "npcs"
+        "npcs",
+        "tools"
     ],
     "map": {
         "key": "level_tilemap",

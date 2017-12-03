@@ -2,7 +2,7 @@ global.Phaser = require('phaser');
 import PrefabHelper from '../helpers/prefab.helper';
 
 class TextPrefab extends Phaser.Text {
-  constructor(gameState, name, position, properties ) {
+  constructor(gameState, name, position, properties) {
     super(gameState.game, position.x, position.y, properties.text, properties.style);
 
     var helper = new PrefabHelper(this);
