@@ -1,5 +1,5 @@
 import SpritePrefab from '../sprite.prefab';
-import MessageBoxPrefab from '../tools/message_box.prefab';
+import MessageBoxPrefab from '../../prefabs/tools/message_box.prefab';
 
 class NpcPrefab extends SpritePrefab {
   constructor(gameState, name, position, properties) {
@@ -14,19 +14,22 @@ class NpcPrefab extends SpritePrefab {
   }
 
   update() {
-    this.gameState.game.physics.arcade.collide(this,
-                                               this.gameState.groups.players,
-                                               this.talk,
-                                               null,
-                                               this);
-
+    this.gameState.game.physics.arcade.collide(
+      this,
+      this.gameState.groups.players,
+      this.talk,
+      null,
+      this
+    );
   }
 
   talk(npc, player) {
     player.stop();
+    player.canMove = false;
     this.gameState.currentMessageBox = new MessageBoxPrefab(this.gameState,
                                                             this.name + '_message',
-                                                            this.message)
+                                                            this.message);
+    this.gameState.userInput.setInput(this.gameState.userInputs.talking_user_input);
   }
 }
 

@@ -15,6 +15,7 @@ class PlayerPrefab extends SpritePrefab {
 
     this.cursors = this.gameState.game.input.keyboard.createCursorKeys();
     this.moveable = new MoveableConcern(this);
+    this.canMove = true;
     this.animations.add("walkingDown", [0, 4, 8, 12], 6, true);
     this.animations.add("walkingUp", [1, 5, 9, 13], 6, true);
     this.animations.add("walkingLeft", [2, 6, 10, 14], 6, true);

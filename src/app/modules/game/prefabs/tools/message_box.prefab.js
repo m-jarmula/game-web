@@ -25,7 +25,13 @@ class MessageBoxPrefab extends SpritePrefab {
                                         text: properties.message,
                                         style: Object.create(this.gameState.TEXT_STYLE)
                                       });
-    this.messageText.anchor.setTo(0.5)
+    this.messageText.anchor.setTo(0.5);
+    this.gameState = gameState;
+  }
+
+  kill() {
+    super.kill();
+    this.messageText.kill();
   }
 }
 

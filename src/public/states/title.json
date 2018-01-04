@@ -34,5 +34,8 @@
             }
         }
     },
-    "userInput": "user-inputs/title_user_input.json"
+    "userInput": {
+      "title_user_input": "user-inputs/title_user_input.json"
+    },
+    "initial_user_input": "title_user_input"
 }

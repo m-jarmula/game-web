@@ -14,5 +14,9 @@
         "key": "level_tilemap",
         "tilesets": ["map_tileset"]
     },
-    "userInput": "user-inputs/world_map_user_input.json"
+    "userInput": {
+      "world_map_user_input": "user-inputs/world_map_user_input.json",
+      "talking_user_input": "user-inputs/talking_user_input.json"
+    },
+    "initial_user_input": "world_map_user_input",
 }

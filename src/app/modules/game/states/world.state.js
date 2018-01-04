@@ -71,5 +71,11 @@ class WorldState extends JsonState {
       this.load.text(npcMessageName, this.levelData.npcMessages[npcMessageName])
     }
   }
+
+  endTalk() {
+    this.userInput.setInput(this.userInputs.world_map_user_input);
+    this.currentMessageBox.kill();
+    this.groups.players.children[0].canMove = true;
+  }
 }
 export default WorldState;

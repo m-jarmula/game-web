@@ -6,14 +6,17 @@ import UserInputPlugin from '../plugins/user-input.plugin.js';
 class JsonState extends BaseState {
   init(levelData) {
     this.levelData = levelData;
+    this.userInputs = {};
   }
 
   create() {
     this.setGroups();
     this.setPrefabs();
     this.userInput = this.game.plugins.add(UserInputPlugin, this);
-    this.userInputData = JSON.parse(this.game.cache.getText('userInput'));
-    this.userInput.setInput(this.userInputData);
+    for(var userInputName in this.levelData.userInput) {
+      this.userInputs[userInputName] = JSON.parse(this.game.cache.getText(userInputName));
+    }
+    this.userInput.setInput(this.userInputs[this.levelData.initial_user_input]);
   }
 
   setGroups() {
