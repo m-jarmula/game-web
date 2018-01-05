@@ -220,5 +220,9 @@ module.exports = function makeWebpackConfig() {
     stats: 'minimal'
   };
 
+  config.node = {
+    fs: 'empty'
+  }
+
   return config;
 }();

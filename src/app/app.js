@@ -13,10 +13,13 @@ import GameModule from './modules/game'
 import HomeCtrl from './home/home.controller';
 import LoginCtrl from './login/login.controller';
 import RegistrationCtrl from './registration/registration.controller';
+import ngActionCable from 'angular-actioncable';
+import ngWebSocket from 'angular-websocket';
+
 
 import run from './run';
 import routing from './app.config';
-angular.module('app', [ServicesModule, DirectivesModule, GameModule, 'ui.router', 'ngStorage', 'ng-token-auth', 'ipCookie'])
+angular.module('app', [ServicesModule, DirectivesModule, GameModule, 'ui.router', 'ngStorage', 'ng-token-auth', 'ipCookie', 'ngActionCable'])
   .run(run)
   .config(routing)
   .controller('HomeCtrl', HomeCtrl)

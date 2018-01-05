@@ -16,7 +16,7 @@ class BoardDirective {
 }
 
 class BoardDirectiveController {
-  constructor(SessionService) {
+  constructor(SessionService, ActionCableChannel) {
     this.game = new Phaser.Game(640, 480, Phaser.AUTO, 'board');
     this.game.state.add("BootState", new BootState());
     this.game.state.add("LoadingState", new LoadingState());
