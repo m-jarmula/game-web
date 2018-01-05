@@ -16,7 +16,22 @@ class BoardDirective {
 }
 
 class BoardDirectiveController {
-  constructor(SessionService, ActionCableChannel) {
+  constructor($scope, SessionService, ActionCableChannel) {
+    debugger;
+    var consumer = new ActionCableChannel("GameChannel");
+    var callback = function(message) {
+      console.warn(message);
+    };
+    consumer.subscribe(callback).then(function(){
+      $scope.sendToMyChannel = function(message){
+        consumer.send(message);
+      };
+      $scope.$on("$destroy", function(){
+        consumer.unsubscribe().then(function(){ $scope.sendToMyChannel = undefined; });
+      });
+    });
+    window.setTimeout(()=>{ console.warn(consumer.send('resr')); }, 2000)
+
     this.game = new Phaser.Game(640, 480, Phaser.AUTO, 'board');
     this.game.state.add("BootState", new BootState());
     this.game.state.add("LoadingState", new LoadingState());
