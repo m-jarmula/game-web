@@ -8,6 +8,7 @@ const FACE_DOWN_FRAME = 0,
 class PlayerPrefab extends SpritePrefab {
   constructor(gameState, name, position, properties) {
     super(gameState, name, position, properties);
+    this.properties = properties;
     this.anchor.setTo(0.5);
     this.walkingSpeed = +properties.walkingSpeed;
     this.gameState.game.physics.arcade.enable(this);
@@ -31,7 +32,13 @@ class PlayerPrefab extends SpritePrefab {
   }
 
   update() {
+    if(!this.canMove)
+      return;
     this.gameState.game.physics.arcade.collide(this, this.gameState.layers.buildings);
+    this.gameState.game.physics.arcade.collide(
+      this,
+      this.gameState.groups.players
+    );
     this.moveable.watchMovement();
   }
 
@@ -63,6 +70,6 @@ class PlayerPrefab extends SpritePrefab {
     this.animations.stop();
     this.frame = this.stoppedFrames[this.body.facing];
   }
- }
+}
 
 export default PlayerPrefab;

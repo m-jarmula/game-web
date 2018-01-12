@@ -24,8 +24,8 @@ class NpcPrefab extends SpritePrefab {
   }
 
   talk(npc, player) {
-    player.stop();
     player.canMove = false;
+    player.stop();
     this.gameState.currentMessageBox = new MessageBoxPrefab(this.gameState,
                                                             this.name + '_message',
                                                             this.message);

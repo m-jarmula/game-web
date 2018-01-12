@@ -42,7 +42,6 @@ class WorldState extends JsonState {
     }, this);
     this.layers[this.map.layer.name].resizeWorld();
     super.create();
-
     for(var objectLayer in this.map.objects) {
       if (this.map.objects.hasOwnProperty(objectLayer)) {
         this.map.objects[objectLayer].forEach(this.createObject, this);
@@ -73,9 +72,10 @@ class WorldState extends JsonState {
   }
 
   endTalk() {
-    this.userInput.setInput(this.userInputs.world_map_user_input);
+    var currentPlayer = this.groups.players.getCurrentPlayer();
     this.currentMessageBox.kill();
-    this.groups.players.children[0].canMove = true;
+    currentPlayer.canMove = true;
+    this.userInput.setInput(this.userInputs.world_map_user_input);
   }
 }
 export default WorldState;

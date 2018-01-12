@@ -1,6 +1,6 @@
 import JsonState from './json.state';
 
-class TitleState extends JsonState {
+class BootState extends JsonState {
   init(levelFile, nextState) {
     this.levelFile = levelFile;
     this.nextState = nextState;
@@ -19,4 +19,4 @@ class TitleState extends JsonState {
     this.game.state.start('LoadingState', true, false, levelData, this.nextState);
   }
 }
-export default TitleState;
+export default BootState;

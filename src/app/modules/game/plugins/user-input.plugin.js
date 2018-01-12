@@ -34,8 +34,11 @@ class UserInputPlugin extends Phaser.Plugin {
       var callbackData = userInput.callback.split('.');
       if(callbackData[0] === 'gameState'){
         context = this.gameState;
-      } else {
-        context = this.gameState.prefabs[callbackData[0]];
+      } else if(callbackData[0] === 'player'){
+        context = this.gameState.groups.players.getCurrentPlayer();
+      }
+      else {
+        context = this.gameState[callbackData[0]];
       }
       method = context[callbackData[1]];
       method.apply(context, userInput.args);

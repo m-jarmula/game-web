@@ -2,11 +2,15 @@ import BaseState from './base.state';
 import SpritePrefab from '../prefabs/sprite.prefab';
 import TextPrefab from '../prefabs/text.prefab';
 import UserInputPlugin from '../plugins/user-input.plugin.js';
+import PlayerGroup from '../groups/player.group';
 
 class JsonState extends BaseState {
   init(levelData) {
     this.levelData = levelData;
     this.userInputs = {};
+    this.prefabGroupClasses = {
+      players: PlayerGroup,
+    }
   }
 
   create() {
@@ -22,7 +26,11 @@ class JsonState extends BaseState {
   setGroups() {
     this.groups = {}
     this.levelData.groups.forEach((groupName) => {
-      this.groups[groupName] = this.game.add.group();
+      if(this.prefabGroupClasses[groupName]){
+        this.groups[groupName] = new this.prefabGroupClasses[groupName](this.game, groupName);
+      } else {
+        this.groups[groupName] = this.game.add.group();
+      }
     }, this);
   }
 

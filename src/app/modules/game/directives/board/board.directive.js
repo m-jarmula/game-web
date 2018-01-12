@@ -2,7 +2,8 @@ import TitleState from '../../states/title.state';
 import BootState from '../../states/boot.state';
 import LoadingState from '../../states/loading.state';
 import WorldState from '../../states/world.state';
-
+import StateHelper from '../../helpers/state.helper';
+import Game from '../../game';
 
 class BoardDirective {
   constructor() {
@@ -17,27 +18,37 @@ class BoardDirective {
 
 class BoardDirectiveController {
   constructor($scope, SessionService, ActionCableChannel) {
-    debugger;
-    var consumer = new ActionCableChannel("GameChannel");
-    var callback = function(message) {
-      console.warn(message);
-    };
-    consumer.subscribe(callback).then(function(){
-      $scope.sendToMyChannel = function(message){
-        consumer.send(message);
-      };
-      $scope.$on("$destroy", function(){
-        consumer.unsubscribe().then(function(){ $scope.sendToMyChannel = undefined; });
-      });
-    });
-    window.setTimeout(()=>{ console.warn(consumer.send('resr')); }, 2000)
+    // var consumer = new ActionCableChannel("GameChannel");
+    // var callback = function(message) {
+    //   console.warn(message);
+    // };
+    // consumer.subscribe(callback).then(function(){
+    //   $scope.sendToMyChannel = function(message){
+    //     consumer.send(message);
+    //   };
+    //   $scope.$on("$destroy", function(){
+    //     consumer.unsubscribe().then(function(){ $scope.sendToMyChannel = undefined; });
+    //   });
+    // });
+    // window.setTimeout(()=>{ console.warn(consumer.send('resr', 'game_state')); }, 5000)
+    // consumer.send('resr', 'game_state').then((data)=>{
+    //   console.warn(data)
+    // })
+    // console.warn(consumer.send('resr', 'game_state'))
+    this.sessionService = SessionService;
+    this.game = new Game(640, 480, Phaser.AUTO, 'board');
+    this.stateHelper = new StateHelper(this.game);
+    this.game.di = this;
+    this.setupStates();
+    this.stateHelper.setStateTo('WorldState')
 
-    this.game = new Phaser.Game(640, 480, Phaser.AUTO, 'board');
+  }
+
+  setupStates() {
     this.game.state.add("BootState", new BootState());
     this.game.state.add("LoadingState", new LoadingState());
     this.game.state.add("TitleState", new TitleState());
     this.game.state.add("WorldState", new WorldState());
-    this.game.state.start("BootState", true, false, 'states/title.json', 'TitleState');
   }
 }
 

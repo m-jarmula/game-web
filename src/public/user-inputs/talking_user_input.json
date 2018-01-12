@@ -1,4 +1,4 @@
-{
+  {
   "keydown": {
       "ENTER": {
           "callback": "gameState.endTalk"
@@ -21,21 +21,21 @@
       }
   },
   "keyup": {
-      "UP": {
-          "callback": "player.changeMovement",
-          "args": ["down", false]
-      },
-      "DOWN": {
-          "callback": "player.changeMovement",
-          "args": ["up", false]
-      },
-      "RIGHT": {
-          "callback": "player.changeMovement",
-          "args": ["right", false]
-      },
-      "LEFT": {
-          "callback": "player.changeMovement",
-          "args": ["left", false]
-      }
+    "UP": {
+        "callback": "player.changeMovement",
+        "args": ["down", false]
+    },
+    "DOWN": {
+        "callback": "player.changeMovement",
+        "args": ["up", false]
+    },
+    "RIGHT": {
+        "callback": "player.changeMovement",
+        "args": ["right", false]
+    },
+    "LEFT": {
+        "callback": "player.changeMovement",
+        "args": ["left", false]
+    }
   }
 }

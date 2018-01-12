@@ -12,7 +12,8 @@ class TitleState extends JsonState {
   }
 
   startGame() {
-    this.game.state.start('BootState', true, false, 'states/town.json', 'WorldState');
+    var stateUrl = this.game.di.stateHelper.stateUrlFor('town');
+    this.game.state.start('BootState', true, false, stateUrl, 'WorldState');
   }
 }
 export default TitleState;

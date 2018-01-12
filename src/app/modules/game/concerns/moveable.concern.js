@@ -4,8 +4,8 @@ class MoveableConcern {
   }
 
   watchMovement() {
-    if(!this.movableObject.canMove)
-      return;
+    // if(!this.movableObject.canMove)
+    //   return;
     this.watchAxisX();
     this.watchAxisY();
     if(this.isNotMoving())
