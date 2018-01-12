@@ -17,7 +17,7 @@ class BoardDirective {
 }
 
 class BoardDirectiveController {
-  constructor($scope, SessionService, ActionCableChannel) {
+  constructor($scope, SessionService, WebSocketService) {
     // var consumer = new ActionCableChannel("GameChannel");
     // var callback = function(message) {
     //   console.warn(message);
