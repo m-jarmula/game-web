@@ -11,8 +11,9 @@ class WebSocketService {
     return consumer.subscribe(onMessage);
   }
 
-  send(channel, message) {
-    this.channels[channel].send(message);
+  send(channel, message, action) {
+    action = action || 'receive'
+    this.channels[channel].send(message, action);
   }
 }
 

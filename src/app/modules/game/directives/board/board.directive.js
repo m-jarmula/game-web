@@ -17,7 +17,7 @@ class BoardDirective {
 }
 
 class BoardDirectiveController {
-  constructor($scope, SessionService, WebSocketService, ActionCableChannel, $cookies) {
+  constructor($scope, SessionService, WebSocketService, ActionCableChannel, $cookies, $window) {
     this.ws = WebSocketService;
     this.$cookies = $cookies;
     this.sessionService = SessionService;
@@ -26,6 +26,9 @@ class BoardDirectiveController {
         this.game.stage.disableVisibilityChange = true
       }
     });
+    $window.onbeforeunload = ()=> {
+      this.game.save();
+    }
     this.stateHelper = new StateHelper(this.game);
     this.game.di = this;
     this.setupStates();

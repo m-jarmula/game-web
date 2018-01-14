@@ -27,11 +27,23 @@ class MainPlayerPrefab extends PlayerPrefab {
 
     this.moving = {left: false, right: false, up: false, down: false};
     this.joinWebSocketChannels();
+    this.gameState.game.onGameClose.push(() => {
+      this.movementSubscription.then(() => {
+        this.gameState.game.di.ws.send(
+          'MovementChannel',
+          {
+            x: this.position.x,
+            y: this.position.y
+          },
+          'save'
+        );
+      })
+    });
   }
 
   changeMovement(direction, move) {
     this.moving[direction] = move;
-    this.movementSubscription.then(()=>{
+    this.movementSubscription.then(() => {
       this.gameState.game.di.ws.send('MovementChannel', {
         user_id: this.properties.user_id,
         direction: direction,
@@ -54,11 +66,16 @@ class MainPlayerPrefab extends PlayerPrefab {
 
   talk(mainPlayer, otherPlayer) {
     this.stop();
+    otherPlayer.stop();
     this.gameState.userInput.setInput(this.gameState.userInputs.talking_user_input);
   }
 
   joinWebSocketChannels() {
-    this.movementSubscription = this.ws.joinChannel('MovementChannel',(data)=>{});
+    this.movementSubscription = this.ws.joinChannel('MovementChannel',(data) => {});
+  }
+
+  onGameClose() {
+
   }
 }
 

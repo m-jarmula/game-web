@@ -35,11 +35,6 @@ class PlayerPrefab extends SpritePrefab {
     this.moveable.watchMovement();
   }
 
-  talk(p1, p2) {
-    this.walkingSpeed = 0;
-    this.gameState.userInput.setInput(this.gameState.userInputs.talking_user_input);
-  }
-
   moveLeft() {
     this.body.velocity.x = -this.walkingSpeed;
     if(this.body.velocity.y === 0)
