@@ -22,7 +22,9 @@
   "dependencies": {
     "@uirouter/angularjs": "^1.0.4",
     "angular": "^1.5.0",
+    "angular-actioncable": "^1.3.0",
     "angular-cookie": "^4.1.0",
+    "angular-cookies": "^1.6.8",
     "angular-websocket": "^2.0.1",
     "bootstrap": "^3.3.7",
     "bufferutil": "^3.0.3",

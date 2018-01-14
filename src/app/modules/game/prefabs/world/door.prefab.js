@@ -19,7 +19,6 @@ class DoorPrefab extends SpritePrefab {
   }
 
   enter() {
-    console.log('test')
     this.gameState.game.state.start("BootState", true, false, this.nextLevel, "WorldState");
   }
 }

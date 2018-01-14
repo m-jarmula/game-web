@@ -13,6 +13,14 @@ class JsonState extends BaseState {
     }
   }
 
+  toParam() {
+    var str = '?'
+    for(var i in this.load.headers) {
+      str += i + '=' + this.load.headers[i] + '&'
+    }
+    return str;
+  }
+
   create() {
     this.setGroups();
     this.setPrefabs();

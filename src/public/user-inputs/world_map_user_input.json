@@ -1,37 +1,37 @@
 {
     "keydown": {
         "UP": {
-            "callback": "player.changeMovement",
+            "callback": "main_player.changeMovement",
             "args": ["down", true]
         },
         "DOWN": {
-            "callback": "player.changeMovement",
+            "callback": "main_player.changeMovement",
             "args": ["up", true]
         },
         "RIGHT": {
-            "callback": "player.changeMovement",
+            "callback": "main_player.changeMovement",
             "args": ["right", true]
         },
         "LEFT": {
-            "callback": "player.changeMovement",
+            "callback": "main_player.changeMovement",
             "args": ["left", true]
         }
     },
     "keyup": {
         "UP": {
-            "callback": "player.changeMovement",
+            "callback": "main_player.changeMovement",
             "args": ["down", false]
         },
         "DOWN": {
-            "callback": "player.changeMovement",
+            "callback": "main_player.changeMovement",
             "args": ["up", false]
         },
         "RIGHT": {
-            "callback": "player.changeMovement",
+            "callback": "main_player.changeMovement",
             "args": ["right", false]
         },
         "LEFT": {
-            "callback": "player.changeMovement",
+            "callback": "main_player.changeMovement",
             "args": ["left", false]
         }
     }

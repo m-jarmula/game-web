@@ -1,21 +1,18 @@
 class WebSocketService {
-  constructor($websocket, SessionService) {
-    // debugger;
-    this.ws = new $websocket('ws://localhost:2345');
+  constructor(ActionCableChannel, SessionService) {
     this.currentUser = SessionService.currentUser;
-    this.joinChannel('test');
+    this.actionCableChannel = ActionCableChannel;
+    this.channels = {};
   }
 
-  joinChannel(channelName) {
-    this.send({
-      event_type: 'join_channel',
-      channel: channelName,
-      user_id: this.currentUser.id
-    });
+  joinChannel(channel, onMessage) {
+    var consumer = new this.actionCableChannel(channel);
+    this.channels[channel] = consumer;
+    return consumer.subscribe(onMessage);
   }
 
-  send(message) {
-    this.ws.send(JSON.stringify(message))
+  send(channel, message) {
+    this.channels[channel].send(message);
   }
 }
 

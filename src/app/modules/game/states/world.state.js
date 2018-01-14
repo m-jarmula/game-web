@@ -1,6 +1,7 @@
 import JsonState from './json.state';
 import SpritePrefab from '../prefabs/sprite.prefab';
 import PlayerPrefab from '../prefabs/world/player.prefab';
+import MainPlayerPrefab from '../prefabs/world/main_player.prefab';
 import DoorPrefab from '../prefabs/world/door.prefab';
 import NpcPrefab from '../prefabs/world/npc.prefab';
 
@@ -10,6 +11,7 @@ class WorldState extends JsonState {
     this.prefabClasses = {
       background: SpritePrefab,
       player: PlayerPrefab,
+      main_player: MainPlayerPrefab,
       door: DoorPrefab,
       npc: NpcPrefab
     }
@@ -72,9 +74,7 @@ class WorldState extends JsonState {
   }
 
   endTalk() {
-    var currentPlayer = this.groups.players.getCurrentPlayer();
-    this.currentMessageBox.kill();
-    currentPlayer.canMove = true;
+    var mainPlayer = this.groups.main_player.children[0];
     this.userInput.setInput(this.userInputs.world_map_user_input);
   }
 }

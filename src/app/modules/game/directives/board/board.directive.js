@@ -17,31 +17,19 @@ class BoardDirective {
 }
 
 class BoardDirectiveController {
-  constructor($scope, SessionService, WebSocketService) {
-    // var consumer = new ActionCableChannel("GameChannel");
-    // var callback = function(message) {
-    //   console.warn(message);
-    // };
-    // consumer.subscribe(callback).then(function(){
-    //   $scope.sendToMyChannel = function(message){
-    //     consumer.send(message);
-    //   };
-    //   $scope.$on("$destroy", function(){
-    //     consumer.unsubscribe().then(function(){ $scope.sendToMyChannel = undefined; });
-    //   });
-    // });
-    // window.setTimeout(()=>{ console.warn(consumer.send('resr', 'game_state')); }, 5000)
-    // consumer.send('resr', 'game_state').then((data)=>{
-    //   console.warn(data)
-    // })
-    // console.warn(consumer.send('resr', 'game_state'))
+  constructor($scope, SessionService, WebSocketService, ActionCableChannel, $cookies) {
+    this.ws = WebSocketService;
+    this.$cookies = $cookies;
     this.sessionService = SessionService;
-    this.game = new Game(640, 480, Phaser.AUTO, 'board');
+    this.game = new Game(640, 480, Phaser.AUTO, 'board', {
+      preload: ()=> {
+        this.game.stage.disableVisibilityChange = true
+      }
+    });
     this.stateHelper = new StateHelper(this.game);
     this.game.di = this;
     this.setupStates();
     this.stateHelper.setStateTo('WorldState')
-
   }
 
   setupStates() {

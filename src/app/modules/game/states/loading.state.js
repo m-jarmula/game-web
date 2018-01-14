@@ -22,7 +22,9 @@ class LoadingState extends JsonState {
         case 'spritesheet':
           this.load.spritesheet(assetKey, asset.source, asset.frame_width, asset.frame_height, asset.frames, asset.margin, asset.spacing); break;
         case 'tilemap':
-          this.load.tilemap(assetKey, asset.source, null, Phaser.Tilemap.TILED_JSON); break;
+          this.load.tilemap(
+            assetKey, asset.source+this.toParam(), null, Phaser.Tilemap.TILED_JSON
+          ); break;
       }
     }
     for(var userInputName in this.levelData.userInput) {

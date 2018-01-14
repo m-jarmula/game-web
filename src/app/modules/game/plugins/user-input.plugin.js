@@ -13,6 +13,7 @@ class UserInputPlugin extends Phaser.Plugin {
   }
 
   setInput(userInputData) {
+    this.enabled = false;
     this.userInputs = { 'keydown': {}, 'keyup': {} };
 
     for(var inputType in userInputData) {
@@ -34,11 +35,8 @@ class UserInputPlugin extends Phaser.Plugin {
       var callbackData = userInput.callback.split('.');
       if(callbackData[0] === 'gameState'){
         context = this.gameState;
-      } else if(callbackData[0] === 'player'){
-        context = this.gameState.groups.players.getCurrentPlayer();
-      }
-      else {
-        context = this.gameState[callbackData[0]];
+      } else if(callbackData[0] === 'main_player'){
+        context = this.gameState.groups.main_player.children[0];
       }
       method = context[callbackData[1]];
       method.apply(context, userInput.args);

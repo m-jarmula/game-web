@@ -9,7 +9,6 @@ class BaseState extends Phaser.State {
 
   getPlayer() {
     this.gameState.di.SessionService.currentUser;
-    console.warn('test');
   }
 }
 export default BaseState;

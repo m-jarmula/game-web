@@ -8,10 +8,11 @@ class BootState extends JsonState {
     this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
     this.scale.pageAlignHorizontally = true;
     this.scale.pageAlignVertically = true;
+    this.load.headers = JSON.parse(this.game.di.$cookies.get('auth_headers'));
   }
 
   preload() {
-    this.load.text('level_file', this.levelFile);
+    this.load.text('level_file', this.levelFile + this.toParam());
   }
 
   create() {
