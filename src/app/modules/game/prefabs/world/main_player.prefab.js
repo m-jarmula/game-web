@@ -6,6 +6,7 @@ const FACE_DOWN_FRAME = 0,
       FACE_LEFT_FRAME = 2,
       FACE_RIGHT_FRAME = 3,
       FACE_UP_FRAME= 1;
+
 class MainPlayerPrefab extends PlayerPrefab {
   constructor(gameState, name, position, properties) {
     super(gameState, name, position, properties);
@@ -79,10 +80,6 @@ class MainPlayerPrefab extends PlayerPrefab {
         this.changeMovement(data.direction, data.move);
       }
     });
-  }
-
-  onGameClose() {
-
   }
 }
 

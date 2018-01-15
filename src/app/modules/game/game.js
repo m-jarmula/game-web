@@ -6,6 +6,10 @@ class Game extends Phaser.Game {
     this.onGameClose = [];
   }
 
+  preload() {
+    this.game.stage.disableVisibilityChange = true
+  }
+
   save() {
     for(var i in this.onGameClose) {
       this.onGameClose[i]();

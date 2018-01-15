@@ -4,9 +4,7 @@ let API_URLS = {};
 API_URLS['ROOT'] = ROOT;
 API_URLS['REGISTER'] = ROOT + '/auth';
 API_URLS['STATES'] = ROOT + '/states/';
-
-class StateManager {
-
-}
+API_URLS['USERS'] = ROOT + '/users/';
+API_URLS['PLAYERS'] = ROOT + '/players/';
 
 export default API_URLS;

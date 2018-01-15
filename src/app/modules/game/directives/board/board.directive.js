@@ -21,11 +21,7 @@ class BoardDirectiveController {
     this.ws = WebSocketService;
     this.$cookies = $cookies;
     this.sessionService = SessionService;
-    this.game = new Game(640, 480, Phaser.AUTO, 'board', {
-      preload: ()=> {
-        this.game.stage.disableVisibilityChange = true
-      }
-    });
+    this.game = new Game(640, 480, Phaser.AUTO, 'board');
     $window.onbeforeunload = ()=> {
       this.game.save();
     }
