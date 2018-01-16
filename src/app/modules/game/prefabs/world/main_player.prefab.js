@@ -51,7 +51,9 @@ class MainPlayerPrefab extends PlayerPrefab {
       this.gameState.game.di.ws.send('MovementChannel', {
         user_id: this.properties.user_id,
         direction: direction,
-        move: move
+        move: move,
+        x: parseFloat(this.position.x, 10).toFixed(3),
+        y: parseFloat(this.position.y, 10).toFixed(3)
       });
     })
   }
