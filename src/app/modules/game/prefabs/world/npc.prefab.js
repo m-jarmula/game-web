@@ -16,7 +16,7 @@ class NpcPrefab extends SpritePrefab {
   update() {
     this.gameState.game.physics.arcade.collide(
       this,
-      this.gameState.groups.players,
+      this.gameState.groups.main_player,
       this.talk,
       null,
       this

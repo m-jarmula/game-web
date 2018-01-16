@@ -28,9 +28,6 @@ class SessionService {
     this.rootScope.$on('auth:logout-success', (ev) => {
       this.onLogout();
     });
-    this.rootScope.$on('auth:registration-email-success', (ev, user) => {
-      this.onLogin(user);
-    });
   }
 
   getCurrentUser() {
