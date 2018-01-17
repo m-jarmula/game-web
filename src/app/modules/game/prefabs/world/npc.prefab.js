@@ -17,14 +17,28 @@ class NpcPrefab extends SpritePrefab {
     this.gameState.game.physics.arcade.collide(
       this,
       this.gameState.groups.main_player,
-      this.talk,
+      this.talkToMainPlayer,
+      null,
+      this
+    );
+    this.gameState.game.physics.arcade.collide(
+      this,
+      this.gameState.groups.players,
+      this.talkToPlayer,
       null,
       this
     );
   }
 
-  talk(npc, player) {
-    player.canMove = false;
+  talkToMainPlayer(npc, player) {
+    player.stop();
+    this.gameState.currentMessageBox = new MessageBoxPrefab(this.gameState,
+                                                            this.name + '_message',
+                                                            this.message);
+    this.gameState.userInput.setInput(this.gameState.userInputs.talking_user_input);
+  }
+
+  talkToPlayer(npc, player) {
     player.stop();
     this.gameState.currentMessageBox = new MessageBoxPrefab(this.gameState,
                                                             this.name + '_message',

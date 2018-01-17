@@ -32,6 +32,12 @@ class PlayerGroup extends Phaser.Group {
     });
   }
 
+  removePlayer(userId){
+    var player = this.findPlayer(userId);
+    player.kill();
+    this.children.pop(player);
+  }
+
 }
 
 export default PlayerGroup;

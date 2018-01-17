@@ -1,5 +1,6 @@
 import SpritePrefab from '../sprite.prefab';
 import MoveableConcern from '../../concerns/moveable.concern';
+import PlayerLabelPrefarb from '../tools/player_label.prefab'
 
 const FACE_DOWN_FRAME = 0,
       FACE_LEFT_FRAME = 2,
@@ -24,6 +25,20 @@ class PlayerPrefab extends SpritePrefab {
     this.stoppedFrames = [FACE_DOWN_FRAME, FACE_LEFT_FRAME, FACE_RIGHT_FRAME, FACE_UP_FRAME];
 
     this.moving = {left: false, right: false, up: false, down: false};
+    this.createLabel(gameState, name, position);
+  }
+
+  createLabel(gameState, name, position) {
+    var properties = {
+      width: 50,
+      height: 15,
+      textStyle: {
+        font: 'bold 10px Arial',
+        fill: '#FFF'
+      }
+    }
+    var position = { x: this.x, y: this.y }
+    this.label = new PlayerLabelPrefarb(gameState, this.properties.player_name, position, properties);
   }
 
   changeMovement(direction, move) {
@@ -31,8 +46,13 @@ class PlayerPrefab extends SpritePrefab {
   }
 
   update() {
+    this.updateLabelPosition();
     this.gameState.game.physics.arcade.collide(this, this.gameState.layers.buildings);
     this.moveable.watchMovement();
+  }
+
+  updateLabelPosition() {
+    this.label.updatePosition({ x: this.x, y: this.y });
   }
 
   moveLeft() {
@@ -62,6 +82,11 @@ class PlayerPrefab extends SpritePrefab {
   stop() {
     this.animations.stop();
     this.moving = {left: false, right: false, up: false, down: false};
+  }
+
+  kill() {
+    super.kill()
+    this.label.kill();
   }
 }
 

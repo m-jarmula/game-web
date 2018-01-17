@@ -28,7 +28,7 @@ class BoardDirectiveController {
     this.stateHelper = new StateHelper(this.game);
     this.game.di = this;
     this.setupStates();
-    this.stateHelper.setStateTo('WorldState')
+    this.stateHelper.setStateTo('WorldState');
   }
 
   setupStates() {

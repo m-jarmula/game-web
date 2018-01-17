@@ -1,12 +1,12 @@
 <div board ng-if="CTRL.showBoard()"></div>
 <div ng-if="CTRL.showPlayerSetup()">
-  <h2 style="text-align: center;margin-bottom: 40px;">Please set up your character data</h2>
+  <h2 style="text-align: center;margin-bottom: 40px;">Please set up your player character data</h2>
   <form ng-submit="CTRL.savePlayer(playerForm)" role="form" ng-init="playerForm = {}" novalidate>
     <div class="form-group">
-      <label>Nick</label>
+      <label>Nick maximum 6 characters</label>
       <input type="text" name="player.name" ng-model="playerForm.name" required="required" class="form-control"/>
     </div>
 
-    <button type="submit" class="btn btn-primary btn-lg">Sign in</button>
+    <button type="submit" class="btn btn-primary btn-lg">Start game</button>
   </form>
 </div>

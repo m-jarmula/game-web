@@ -10,40 +10,22 @@ const FACE_DOWN_FRAME = 0,
 class MainPlayerPrefab extends PlayerPrefab {
   constructor(gameState, name, position, properties) {
     super(gameState, name, position, properties);
-    this.properties = properties;
-    this.anchor.setTo(0.5);
-    this.walkingSpeed = +properties.walkingSpeed;
-    this.gameState.game.physics.arcade.enable(this);
-    this.body.collideWorldBounds = true;
+
     this.ws = this.gameState.game.di.ws;
-
-    this.cursors = this.gameState.game.input.keyboard.createCursorKeys();
-    this.moveable = new MoveableConcern(this);
-    this.animations.add("walkingDown", [0, 4, 8, 12], 6, true);
-    this.animations.add("walkingUp", [1, 5, 9, 13], 6, true);
-    this.animations.add("walkingLeft", [2, 6, 10, 14], 6, true);
-    this.animations.add("walkingRight", [3, 7, 11, 15], 6, true);
-
-    this.stoppedFrames = [FACE_DOWN_FRAME, FACE_LEFT_FRAME, FACE_RIGHT_FRAME, FACE_UP_FRAME];
-
-    this.moving = {left: false, right: false, up: false, down: false};
-    this.joinWebSocketChannels();
+    this.joinMovementChannels();
+    this.joinGameChannel(this);
     this.gameState.game.onGameClose.push(() => {
       this.movementSubscription.then(() => {
         this.gameState.game.di.ws.send(
-          'MovementChannel',
+          'GameChannel',
           {
             x: this.position.x,
             y: this.position.y
           },
-          'save'
+          'user_left'
         );
       })
     });
-  }
-
-  changeMovement(direction, move) {
-    this.moving[direction] = move;
   }
 
   notifyMovement(direction, move) {
@@ -59,7 +41,7 @@ class MainPlayerPrefab extends PlayerPrefab {
   }
 
   update() {
-    this.gameState.game.physics.arcade.collide(this, this.gameState.layers.buildings);
+    super.update();
     this.gameState.game.physics.arcade.collide(
         this,
         this.gameState.groups.players,
@@ -67,7 +49,6 @@ class MainPlayerPrefab extends PlayerPrefab {
         null,
         this
     );
-    this.moveable.watchMovement();
   }
 
   talk(mainPlayer, otherPlayer) {
@@ -76,12 +57,33 @@ class MainPlayerPrefab extends PlayerPrefab {
     this.gameState.userInput.setInput(this.gameState.userInputs.talking_user_input);
   }
 
-  joinWebSocketChannels() {
+  joinMovementChannels() {
     this.movementSubscription = this.ws.joinChannel('MovementChannel',(data) => {
       if(data.user_id == this.properties.user_id) {
         this.changeMovement(data.direction, data.move);
       }
     });
+  }
+
+  joinGameChannel(that) {
+    this.gameSubscription = this.ws.joinChannel('GameChannel',(data) => {
+      switch(data.method){
+        case 'user_joined': that.userJoined(that, data.player);
+        case 'user_left': that.userLeft(that, data);
+      }
+
+    });
+  }
+
+  userJoined(that, player) {
+    if(that.properties.user_id != player.properties.user_id &&
+       !that.gameState.groups.players.findPlayer(player.properties.user_id))
+      new PlayerPrefab(that.gameState, player, { x: player.x, y: player.y }, player.properties);
+  }
+
+  userLeft(that, data) {
+    if(that.gameState.groups.players.findPlayer(data.user_id))
+      that.gameState.groups.players.removePlayer(data.user_id);
   }
 }
 
