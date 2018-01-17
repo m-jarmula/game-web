@@ -14,20 +14,20 @@ class NpcPrefab extends SpritePrefab {
   }
 
   update() {
-    this.gameState.game.physics.arcade.collide(
-      this,
-      this.gameState.groups.main_player,
-      this.talkToMainPlayer,
-      null,
-      this
-    );
-    this.gameState.game.physics.arcade.collide(
-      this,
-      this.gameState.groups.players,
-      this.talkToPlayer,
-      null,
-      this
-    );
+    // this.gameState.game.physics.arcade.collide(
+    //   this,
+    //   this.gameState.groups.main_player,
+    //   this.talkToMainPlayer,
+    //   null,
+    //   this
+    // );
+    // this.gameState.game.physics.arcade.collide(
+    //   this,
+    //   this.gameState.groups.players,
+    //   this.talkToPlayer,
+    //   null,
+    //   this
+    // );
   }
 
   talkToMainPlayer(npc, player) {

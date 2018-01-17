@@ -44,13 +44,13 @@ class MainPlayerPrefab extends PlayerPrefab {
 
   update() {
     super.update();
-    this.gameState.game.physics.arcade.collide(
-        this,
-        this.gameState.groups.players,
-        this.talk,
-        null,
-        this
-    );
+    // this.gameState.game.physics.arcade.collide(
+    //     this,
+    //     this.gameState.groups.players,
+    //     this.talk,
+    //     null,
+    //     this
+    // );
   }
 
   talk(mainPlayer, otherPlayer) {
