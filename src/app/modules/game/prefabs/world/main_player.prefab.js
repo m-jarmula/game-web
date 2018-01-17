@@ -66,24 +66,30 @@ class MainPlayerPrefab extends PlayerPrefab {
   }
 
   joinGameChannel(that) {
-    this.gameSubscription = this.ws.joinChannel('GameChannel',(data) => {
+    that.gameSubscription = this.ws.joinChannel('GameChannel',(data) => {
       switch(data.method){
-        case 'user_joined': that.userJoined(that, data.player);
-        case 'user_left': that.userLeft(that, data);
+        case 'user_joined': that.userJoined(that, data.player); return;
+        case 'user_left': that.userLeft(that, data); return;
       }
 
     });
   }
 
   userJoined(that, player) {
-    if(that.properties.user_id != player.properties.user_id &&
-       !that.gameState.groups.players.findPlayer(player.properties.user_id))
-      new PlayerPrefab(that.gameState, player, { x: player.x, y: player.y }, player.properties);
+    if(!that.gameState.groups.players.findPlayer(player.properties.user_id) &&
+      that.properties.user_id != player.properties.user_id)
+    {
+      var prefabClass = that.gameState.prefabClasses.player;
+      player.properties.group = 'players';
+      new prefabClass(that.gameState, player, { x: player.x, y: player.y }, player.properties);
+      // debugger;
+    }
   }
 
   userLeft(that, data) {
-    if(that.gameState.groups.players.findPlayer(data.user_id))
+    if(that.gameState.groups.players.findPlayer(data.user_id)){
       that.gameState.groups.players.removePlayer(data.user_id);
+    }
   }
 }
 
