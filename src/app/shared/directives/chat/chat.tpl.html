@@ -1,0 +1,10 @@
+<div id="chat" ng-show="CTRL.isOpen">
+  <ul ng-if='CTRL.messages.length > 0'>
+    <li ng-repeat="obj in CTRL.messages">
+      <span class="author">{{obj.player_name}}:</span> <span class="message">{{obj.message}}</span>
+    </li>
+  </ul>
+  <form ng-submit="CTRL.sendMessage(message)" role="form" ng-init="message = {}">
+    <input ng-model="message.body" class="form-control" type="text" ng-click="sendMessage()" placeholder="Type a message" value="message.body" />
+  </form>
+</div>

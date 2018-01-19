@@ -6,6 +6,7 @@ import LocalStorageService from './storage/local-storage.service';
 import SessionService from './session.service';
 import WebSocketService from './websocket.service';
 import UserService from './user.service';
+import MessageService from './message.service';
 
 let moduleName = 'services';
 
@@ -15,6 +16,7 @@ let servicesModule = angular.module(moduleName, [])
   .service('SessionService', SessionService)
   .service('WebSocketService', WebSocketService)
   .service('UserService', UserService)
+  .service('MessageService', MessageService)
   .factory('Interceptor', Interceptor)
 
 export default moduleName;

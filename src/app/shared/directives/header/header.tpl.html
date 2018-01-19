@@ -4,7 +4,7 @@
       <a class="navbar-brand" href="/">Game</a>
     </div>
     <ul class="nav navbar-nav">
-      <li><a href="#">Servers</a></li>
+      <li><a href="" ng-click="CTRL.chatToggle()">Chat</a></li>
       <li ng-if="!CTRL.currentUser.isLoggedIn"><a href="/login">login</a></li>
       <li ng-if="!CTRL.currentUser.isLoggedIn"><a href="/register">Register</a></li>
       <li ng-if="CTRL.currentUser.isLoggedIn"><a href="" ng-click="CTRL.logout()">Logout</a></li>
