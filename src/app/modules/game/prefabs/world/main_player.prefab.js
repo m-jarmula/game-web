@@ -1,7 +1,7 @@
 import SpritePrefab from '../sprite.prefab';
 import MoveableConcern from '../../concerns/moveable.concern';
 import PlayerPrefab from './player.prefab';
-import SortedQueue from '../../helpers/sorted_queue.helper';
+import MovementDetectorHelper from '../../helpers/movement_detector.helper';
 
 const FACE_DOWN_FRAME = 0,
       FACE_LEFT_FRAME = 2,
@@ -14,7 +14,7 @@ class MainPlayerPrefab extends PlayerPrefab {
   constructor(gameState, name, position, properties) {
     super(gameState, name, position, properties);
 
-    this.sortedQueue = new SortedQueue(4);
+    this.movementDetectorHelper = new MovementDetectorHelper();
     this.ws = this.gameState.game.di.ws;
     this.joinMovementChannels();
     this.joinGameChannel(this);
@@ -68,35 +68,10 @@ class MainPlayerPrefab extends PlayerPrefab {
 
   joinMovementChannels() {
     this.movementSubscription = this.ws.joinChannel('MovementChannel',(data) => {
-      if(data.user_id == this.properties.user_id) {
-        switch(data.direction){
-          case 'up': {
-            if(this.lastUpTimestamp < data.timestamp) {
-              this.lastUpTimestamp = data.timestamp;
-              this.changeMovement(data.direction, data.move);
-            }
-          }; return;
-          case 'down': {
-            if(this.lastDownTimestamp < data.timestamp) {
-              this.lastDownTimestamp = data.timestamp;
-              this.changeMovement(data.direction, data.move);
-            }
-          }; return;
-          case 'right': {
-            if(this.lastRightTimestamp < data.timestamp) {
-              this.lastRightTimestamp = data.timestamp;
-              this.changeMovement(data.direction, data.move);
-            }
-          }; return;
-          case 'left': {
-            if(this.lastLeftTimestamp < data.timestamp) {
-              this.lastLeftTimestamp = data.timestamp;
-              this.changeMovement(data.direction, data.move);
-            }
-          }; return;
-        }
-        // data = this.sortedQueue.add(data).last();
-        // console.warn(data);
+      if(data.user_id == this.properties.user_id &&
+         this.movementDetectorHelper.validateTimestamp(data)) {
+           this.changeMovement(data.direction, data.move);
+           this.movementDetectorHelper.updateTimestamp(data);
       }
     });
   }
