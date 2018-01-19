@@ -62,6 +62,7 @@ class MainPlayerPrefab extends PlayerPrefab {
   joinMovementChannels() {
     this.movementSubscription = this.ws.joinChannel('MovementChannel',(data) => {
       if(data.user_id == this.properties.user_id) {
+        console.warn(data);
         this.changeMovement(data.direction, data.move);
       }
     });

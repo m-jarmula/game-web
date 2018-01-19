@@ -19,19 +19,19 @@
     },
     "keyup": {
         "UP": {
-            "callback": "main_player.changeMovement",
+            "callback": "main_player.notifyMovement",
             "args": ["down", false]
         },
         "DOWN": {
-            "callback": "main_player.changeMovement",
+            "callback": "main_player.notifyMovement",
             "args": ["up", false]
         },
         "RIGHT": {
-            "callback": "main_player.changeMovement",
+            "callback": "main_player.notifyMovement",
             "args": ["right", false]
         },
         "LEFT": {
-            "callback": "main_player.changeMovement",
+            "callback": "main_player.notifyMovement",
             "args": ["left", false]
         }
     }
