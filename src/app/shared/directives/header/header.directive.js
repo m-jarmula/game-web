@@ -10,13 +10,19 @@ class HeaderDirective {
 }
 
 class HeaderDirectiveController {
-  constructor(SessionService) {
+  constructor(SessionService, $rootScope) {
+    this.rootScope = $rootScope;
     this.sessionService = SessionService;
     this.currentUser = SessionService.getCurrentUser();
   }
 
   logout() {
     this.sessionService.onLogout()
+  }
+
+  chatToggle() {
+    this.rootScope.$broadcast('chat.state.changed');
+    // this.rootScope.$emit('chat.state.changed');
   }
 }
 
