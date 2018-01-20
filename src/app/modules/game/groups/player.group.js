@@ -36,9 +36,9 @@ class PlayerGroup extends Phaser.Group {
           var remoteY = parseInt(data.y, 10);
           var localX = parseInt(player.x, 10);
           var localY = parseInt(player.y, 10);
-          if(Math.abs(remoteX - localX) == 20)
+          if(Math.abs(remoteX - localX) > 20)
             player.x = remoteX;
-          if(Math.abs(remoteY - localY) == 20)
+          if(Math.abs(remoteY - localY) > 20)
             player.y = remoteY;
           player.changeMovement(data.direction, data.move);
           this.movementDetectorHelper.updateTimestamp(data);
