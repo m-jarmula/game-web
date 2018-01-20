@@ -32,10 +32,14 @@ class PlayerGroup extends Phaser.Group {
       if(player){
         player.movementDetectorHelper = player.movementDetectorHelper || new MovementDetectorHelper();
         if(this.movementDetectorHelper.validateTimestamp(data)) {
-          if(player.body.position.x != data.x)
-            player.body.position.x = data.x;
-          if(player.body.position.y != data.y)
-            player.body.position.y = data.y;
+          var remoteX = parseInt(data.x, 10);
+          var remoteY = parseInt(data.y, 10);
+          var localX = parseInt(player.x, 10);
+          var localY = parseInt(player.y, 10);
+          if(Math.abs(remoteX - localX) == 20)
+            player.x = remoteX;
+          if(Math.abs(remoteY - localY) == 20)
+            player.y = remoteY;
           player.changeMovement(data.direction, data.move);
           this.movementDetectorHelper.updateTimestamp(data);
         }
