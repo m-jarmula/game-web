@@ -16,12 +16,8 @@ class MainPlayerPrefab extends PlayerPrefab {
 
     this.movementDetectorHelper = new MovementDetectorHelper();
     this.ws = this.gameState.game.di.ws;
-    this.joinMovementChannels();
+    this.joinMovementChannel();
     this.joinGameChannel(this);
-    this.lastUpTimestamp = 0;
-    this.lastDownTimestamp = 0;
-    this.lastRightTimestamp = 0;
-    this.lastLeftTimestamp = 0;
     this.gameState.game.onGameClose.push(() => {
       this.movementSubscription.then(() => {
         this.gameState.game.di.ws.send(
@@ -66,7 +62,7 @@ class MainPlayerPrefab extends PlayerPrefab {
     // this.gameState.userInput.setInput(this.gameState.userInputs.talking_user_input);
   }
 
-  joinMovementChannels() {
+  joinMovementChannel() {
     this.movementSubscription = this.ws.joinChannel('MovementChannel',(data) => {
       if(data.user_id == this.properties.user_id &&
          this.movementDetectorHelper.validateTimestamp(data)) {

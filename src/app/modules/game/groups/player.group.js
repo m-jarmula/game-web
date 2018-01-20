@@ -1,4 +1,5 @@
 import PlayerPrefab from '../prefabs/world/player.prefab';
+import MovementDetectorHelper from '../helpers/movement_detector.helper';
 
 const DIRECTION_LEFT = 'left',
 DIRECTION_RIGHT = 'right',
@@ -9,6 +10,7 @@ class PlayerGroup extends Phaser.Group {
 
   constructor(game, name) {
     super(game, game.world, name);
+    this.movementDetectorHelper = new MovementDetectorHelper();
     this.currentUser = game.di.sessionService.currentUser;
     this.currentPlayer = null;
     this.enableBody = true;
@@ -27,8 +29,13 @@ class PlayerGroup extends Phaser.Group {
   joinWebSocketChannels() {
     this.movementSubscription = this.ws.joinChannel('MovementChannel',(data)=>{
       var player = this.findPlayer(data.user_id);
-      if(player)
-        player.changeMovement(data.direction, data.move);
+      if(player){
+        player.movementDetectorHelper = player.movementDetectorHelper || new MovementDetectorHelper();
+        if(this.movementDetectorHelper.validateTimestamp(data)) {
+          player.changeMovement(data.direction, data.move);
+          this.movementDetectorHelper.updateTimestamp(data);
+        }
+      }
     });
   }
 
